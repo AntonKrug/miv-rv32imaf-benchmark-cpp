@@ -18,15 +18,26 @@ void SysTick_Handler(void) {
 }
 
 uint32_t test_raytracer() {
-  uint32_t expected = 0;
+  uint32_t expectedDebug   = 709576;
+  uint32_t expectedRelease = 709576;
   uint32_t actual;
   uint32_t start;
   uint32_t end;
+  uint32_t pass;
+
 
   start = tick_current;
   actual = raytracer();
   end = tick_current;
-  printf("Raytracer checksum= %s, time=%dms\n", (expected != actual) ? "PASS" : "FAIL");
+
+  if ( (expectedDebug != actual) &&  (expectedRelease != actual) ) {
+	pass = 0;
+  }
+  else {
+	pass = 1;
+  }
+
+  printf("Raytracer checksum(%d)= %s, time=%d(ms)\n", actual, (pass) ? "PASS" : "FAIL", end - start);
   return end - start;
 }
 
@@ -38,7 +49,7 @@ int main() {
 
   SysTick_Config(SYS_CLK_FREQ/1000);
   tick_total += test_raytracer();
-  printf("Finished in final time %d\n", tick_total);
+  printf("Finished in final time %d(ms). Lower number is better.\n", tick_total);
 
 
   return 0;
