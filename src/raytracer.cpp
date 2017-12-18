@@ -137,7 +137,7 @@ Shade calculateShadeOfTheRay(Ray ray, Light light) {
 uint32_t raytracer() {
   uint32_t sum = 0;
   for (float zoom = 12.0f; zoom <= 32.0f; zoom+=10.0f) {
-	for (float lightRotate = 0.0f; lightRotate < 2.0f * M_PI_F; lightRotate += M_PI_F / 11.0f) {
+	for (float lightRotate = 0.0f; lightRotate < 2.0f * M_PI_F; lightRotate += M_PI_F / 21.0f) {
 	  Light light(Vector3(2.0f * WIDTH  *  cosf(lightRotate),
 						  3.0f * HEIGHT * (sinf(lightRotate)-0.5f), -100.0f), Shade(0.7f));
 
